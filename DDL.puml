@@ -1,0 +1,65 @@
+@startuml
+class user {
+    -String id
+    -String userName
+    -String firstName
+    -String lastName
+    -String password
+    +String getUserByID(String id)
+    +String getIdByUserName(String userName)
+    +boolean authenticate(String userName, String password)
+    +boolean createUser(String userName, String firstName, String lastName, String password)
+    +boolean deleteUser(String id)
+    +boolean updateUser(String id, String userName, String firstName, String lastName, String password)
+}
+
+enum BeverageType{
+    BEER
+    WINE
+    COCKTAIL
+    NONALCOHOLIC
+}
+
+class transaction {
+    -String id
+    -String fs_user_id
+    -String fs_beverage_id
+    -String timeStamp
+    +Transaction getTransactionByID(String id)
+    +Transaction[] getTransactionByUserID(String fs_user_id)
+    +Transaction[] getTransactionByBeverageID(String fs_beverage_id)
+    +boolean createTransaction(String fs_user_id, String fs_beverage_id)
+    +boolean deleteTransaction(String id)
+    +Transaction[] getAllTransactions()
+}
+
+class beverage {
+    -String id
+    -String name
+    -String description
+    -String price
+    -String image
+    -BeverageType type
+    -Number proof
+    +Beverage getBeverageByID(String id)
+    +Beverage[] getBeverageByName(String name)
+    +Beverage[] getBeverageByType(BeverageType type)
+    +boolean createBeverage(String name, String description, String price, String image, BeverageType type)
+    +boolean deleteBeverage(String id)
+    +boolean updateBeverage(String id, String name, String description, String price, String image, BeverageType type)
+}
+
+class nfc_token {
+    -String id
+    -String token
+    -String fs_user_id
+    +nfc_token getNFCTokenByID(String id)
+    +nfc_token[] getNFCTokenByUserID(String user_id)
+    +user getUserByNFCToken(String token)
+    +user getUserByNFCTokenId(String nfc_token_id)
+    +boolean createNFCToken(String token, String fs_user_id)
+    +boolean deleteNFCToken(String id)
+    +boolean updateNFCToken(String id, String token, String fs_user_id)
+}
+
+@enduml
